@@ -4598,7 +4598,6 @@ void lcd_calibrate_pinda() {
 }
 
 void set_bear() {
-     bearCalibration == eeprom_read_byte((unsigned char *)EEPROM_BEARMODE);
     if(bearCalibration == 1) bearCalibration = 0;
     else bearCalibration = 1;
     eeprom_update_byte((unsigned char *)EEPROM_BEARMODE, bearCalibration);
