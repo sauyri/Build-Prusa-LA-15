@@ -791,6 +791,9 @@ void manage_response(bool move_axes, bool turn_off_nozzle, uint8_t move)
 //!
 void mmu_load_to_nozzle()
 {
+	int mmu_melt_zone = eeprom_read_byte((unsigned char *)EEPROM_MMU_MELT_ZONE);
+	int mmu_melt_distance = eeprom_read_byte((unsigned char *)EEPROM_MMU_MELT_DISTANCE);
+
 	st_synchronize();
 	
 	bool saved_e_relative_mode = axis_relative_modes[E_AXIS];
@@ -804,17 +807,16 @@ void mmu_load_to_nozzle()
 		current_position[E_AXIS] += 7.2f;
 	}
     float feedrate = 562;
-	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], feedrate / 60, active_extruder);
+	plan_buffer_line_curposXYZE(feedrate / 60, active_extruder);
     st_synchronize();
-	current_position[E_AXIS] += 14.4f;
-	feedrate = 871;
+    current_position[E_AXIS] += mmu_melt_zone;
 	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], feedrate / 60, active_extruder);
     st_synchronize();
 	current_position[E_AXIS] += 36.0f;
 	feedrate = 1393;
-	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], feedrate / 60, active_extruder);
+	plan_buffer_line_curposXYZE(feedrate / 60, active_extruder);
     st_synchronize();
-	current_position[E_AXIS] += 14.4f;
+    current_position[E_AXIS] += mmu_melt_distance;
 	feedrate = 871;
 	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], feedrate / 60, active_extruder);
     st_synchronize();
