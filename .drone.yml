@@ -92,7 +92,7 @@ steps:
       draft: true    
       checksum: md5
       files: 
-        - $DRONE_WORKSPACE/out/*
+        - $DRONE_WORKSPACE/out/*.*
     when:
       event: 
         - tag
