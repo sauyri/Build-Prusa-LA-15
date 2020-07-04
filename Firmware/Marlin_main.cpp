@@ -7535,7 +7535,7 @@ Sigma_Exit:
     break;
 
     //Kuo mCodes
-/*case 919: //! M919 - Set TMC2130 toff Kuo
+case 919: //! M919 - Set TMC2130 toff Kuo
      {
      uint8_t a = 0;
      uint8_t theValue;
@@ -7668,7 +7668,7 @@ Sigma_Exit:
      tmc2130_setup_chopper(a, tmc2130_mres[a], tmc2130_current_h[a], tmc2130_current_r[a]);
 
     }
-    break;*/
+    break;
 
 //end Kuo m-Codes ===
 
